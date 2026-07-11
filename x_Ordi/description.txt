@@ -1,0 +1,33 @@
+À vendre : 4 machines prêtes à tourner: 
+1 > 
+-Disque M2 : 500Gb + 2Tb
+-Carte graphique : Radeon RTX 580
+-Carte mère : 
+-Precesseur : AMD Ryzen 5 5500 8Gb
+-RAM : 32GB
+-Boîtier : Be quite!
+PRIX : 480
+2 >
+-Disque M2 : 500Gb + 500Gb
+-Carte graphique : Nvidia GeForce RTX 2070 8Gb
+-Carte mère : 
+-Precesseur : AMD Ryzen 5 3600 6 Core
+-RAM : 32GB
+-Boîtier : Be quite!
+PRIX : 580
+3 >
+-Disque M2 : 500Gb + 1Tb
+-Carte graphique : Nvidia GeForce RTX 1080 8Gb
+-Carte mère : 
+-Precesseur : Intel Core i7-7700k 
+-RAM : 32GB
+-Boîtier : Cooler Master
+PRIX : 450
+4 >
+-Disque M2 : 1Tb
+-Carte graphique : Nvidia GeForce RTX 1080 Ti 11Gb
+-Carte mère : 
+-Precesseur : AMD Ryzen 9 5900X 12 Core
+-RAM : 64GB
+-Boîtier : Be quite!
+PRIX : 750 

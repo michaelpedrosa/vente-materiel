@@ -1,0 +1,14 @@
+Serveur NAS Synology - Baie rack complete
+
+Serveur NAS Synology en rack avec baie serveur complete.
+Configuration rack incluant :
+- 2x NAS Synology (baies multiples, disques visibles en fonctionnement)
+- Switch reseau
+- Cablage structure (Ethernet jaune + fibre/cuivre)
+- Baie rack noire ouverte
+Ideal pour stockage reseau, sauvegarde, serveur multimedia ou entreprise.
+En etat de fonctionnement (LEDs actives sur la photo).
+
+Remise en main propre uniquement (materiel lourd).
+
+Prix : à discuter

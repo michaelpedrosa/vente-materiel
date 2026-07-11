@@ -1,0 +1,12 @@
+Résolution d'image max. - 3840 x 1920 pixels
+Fonctions de la caméra d'action - 360°, Enregistrement 3D
+Résolution de l'image - 8K
+Taux de rafraîchissement des images avec résolution max. - 30p
+Transmission sans fil - WIFI
+Formats vidéo - mp4
+Formats graphiquesi - JPEG, RAW
+Connexions vidéo - mini HDMI (1x) 
+Ports de données - 1 x USB-C-C
+Sorties audio - USB
+Capacité de la batterie - 5000 mAh
+Autonomie de la batterie - 1.25h

@@ -1,0 +1,5 @@
+-Processeur AMD Ryzen 7 7840HS avec 8 cœurs
+-32 Go de RAM DDR5 pour des performances élevées
+-SSD de 1 To pour un accès rapide aux données
+-Dimensions compactes et design léger
+-Windows 11 Pro

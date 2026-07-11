@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vente Mat&eacute;riel Professionnel - Liquidation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #6e6e73;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badge-urgent {
+            display: inline-block;
+            background: #e94560;
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 25px 20px;
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border: 1px solid #d2d2d7;
+            background: #fff;
+            color: #1d1d1f;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .filter-btn.active {
+            background: #1d1d1f;
+            border-color: #1d1d1f;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .total-banner {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 35px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .total-banner strong {
+            color: #e94560;
+            font-size: 1.3rem;
+        }
+
+        .total-banner span {
+            color: #6e6e73;
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-img-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+            background: #f0f0f0;
+        }
+
+        .card-img-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .card-header {
+            padding: 16px 18px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-category {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #e94560;
+            font-weight: 600;
+        }
+
+        .card-status {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 12px 18px 18px;
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 6px;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+
+        .card-price .old-price {
+            font-size: 0.9rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        .card-price .free {
+            color: #2e7d32;
+        }
+
+        .card-description {
+            font-size: 0.85rem;
+            color: #6e6e73;
+            margin-bottom: 12px;
+        }
+
+        .card-details {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+
+        .card-details li {
+            font-size: 0.8rem;
+            color: #555;
+            padding: 2px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .card-details li::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #e94560;
+        }
+
+        .card-footer {
+            padding: 12px 18px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-condition {
+            font-size: 0.78rem;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+
+        .card-cta {
+            font-size: 0.78rem;
+            color: #e94560;
+            font-weight: 600;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #666;
+            z-index: 10;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #f0f0f0;
+        }
+
+        .modal-gallery {
+            position: relative;
+            background: #f5f5f7;
+            border-radius: 16px 16px 0 0;
+            overflow: hidden;
+        }
+
+        .modal-main-img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background: #f5f5f7;
+            display: block;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+
+        .modal-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-nav.prev {
+            left: 15px;
+        }
+
+        .modal-nav.next {
+            right: 15px;
+        }
+
+        .modal-thumbs {
+            display: flex;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #f5f5f7;
+            overflow-x: auto;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s, opacity 0.2s;
+            flex-shrink: 0;
+        }
+
+        .modal-thumb:hover {
+            opacity: 0.8;
+        }
+
+        .modal-thumb.active {
+            border-color: #e94560;
+        }
+
+        .modal-info {
+            padding: 25px 30px;
+        }
+
+        .modal-info h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        .modal-info .modal-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #e94560;
+            margin-bottom: 15px;
+        }
+
+        .modal-info .modal-price .old-price {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .modal-info .modal-desc {
+            color: #6e6e73;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-info .modal-details {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .modal-info .modal-details li {
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        .modal-info .modal-details li::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #e94560;
+        }
+
+        .modal-info .modal-condition {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 5px 14px;
+            border-radius: 15px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .modal-counter {
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            color: #999;
+            background: #f5f5f7;
+        }
+
+        /* CONTACT */
+        .contact-section {
+            background: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .contact-section h2 {
+            font-size: 1.8rem;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .contact-section p {
+            color: #6e6e73;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: #e94560;
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: #d63851;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item strong {
+            display: block;
+            color: #1d1d1f;
+            font-size: 1.1rem;
+        }
+
+        .info-item span {
+            color: #6e6e73;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+            font-size: 0.8rem;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                position: static;
+            }
+
+            .modal-main-img {
+                height: 280px;
+            }
+
+            .modal-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Vente Mat&eacute;riel Professionnel</h1>
+    <p>Liquidation de mat&eacute;riel vid&eacute;o, audio, informatique et mobilier. Tout doit partir !</p>
+    <span class="badge-urgent">Vente urgente - Prix n&eacute;gociables</span>
+</header>
+
+<div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all')">Tout</button>
+    <button class="filter-btn" onclick="filterCards('video')">Vid&eacute;o / Photo</button>
+    <button class="filter-btn" onclick="filterCards('audio')">Audio</button>
+    <button class="filter-btn" onclick="filterCards('drone')">Drones</button>
+    <button class="filter-btn" onclick="filterCards('informatique')">Informatique</button>
+    <button class="filter-btn" onclick="filterCards('mobilier')">Mobilier</button>
+</div>
+
+<div class="container">
+
+    <div class="total-banner">
+        <strong>55+ articles</strong> <span>| Remise en main propre</span>
+    </div>
+
+    <div class="grid">
+
+        <!-- DRONES -->
+        <div class="card" data-category="drone" onclick="openModal(this)" data-photos='["x_Drone DJIPhantom 4/20260702_145336.jpg","x_Drone DJIPhantom 4/20260702_145725.jpg","x_Drone DJIPhantom 4/20260702_145729.jpg","x_Drone DJIPhantom 4/20260702_145740.jpg","x_Drone DJIPhantom 4/20260702_145807.jpg"]' data-title="Drone DJI Phantom 4 Pro - Kit complet" data-price="750 CHF" data-desc="" data-details="Cam&eacute;ra 4K stabilis&eacute;e|Kit complet : drone + 2 batteries + radiocommande + chargeur + c&acirc;bles|Valise de transport rigide type Pelican (mousse pr&eacute;-d&eacute;coup&eacute;e)|Vol stable, GPS, modes intelligents (Follow Me, Waypoints)|En bon &eacute;tat g&eacute;n&eacute;ral" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Drone DJIPhantom 4/20260702_145336.jpg" alt="DJI Phantom 4 Pro">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Drone</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Drone DJI Phantom 4 Pro - Kit complet</h3>
+                <div class="card-price">750 CHF</div>
+                <p class="card-description">Drone 4K stabilis&eacute;e avec valise rigide type Pelican.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="drone" onclick="openModal(this)" data-photos='["x_Drone DJI/20260702_144656.jpg","x_Drone DJI/20260702_144848.jpg","x_Drone DJI/20260702_144855.jpg","x_Drone DJI/20260702_144906.jpg","x_Drone DJI/20260702_144959.jpg"]' data-title="Drone DJI Mini 3 Pro - Kit complet" data-price="700 CHF" data-desc="" data-details="Cam&eacute;ra 4K HDR, nacelle 3 axes|D&eacute;tection d'obstacles|Moins de 249g (pas d'enregistrement requis)|Radiocommande DJI RC (&eacute;cran int&eacute;gr&eacute;)|Kit complet : 2 batteries + hub de charge + h&eacute;lices de rechange|Valise de transport rigide incluse|En excellent &eacute;tat" data-condition="Excellent &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Drone DJI/20260702_144656.jpg" alt="DJI Mini 3 Pro">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Drone</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Drone DJI Mini 3 Pro - Kit complet</h3>
+                <div class="card-price">700 CHF</div>
+                <p class="card-description">Drone 4K HDR, &lt;249g, kit complet avec RC &eacute;cran.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Excellent &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="drone" onclick="openModal(this)" data-photos='["x_Radio DJI/20260701_161103.jpg","x_Radio DJI/20260701_161111.jpg","x_Radio DJI/20260701_161135.jpg"]' data-title="Radiocommande DJI RC-N1" data-price="55 CHF" data-desc="" data-details="Sans &eacute;cran, support smartphone|Compatible DJI Mini 2, Mini 3, Mavic Air 2, etc.|Modes Cine / Normal / Sport|En parfait &eacute;tat" data-condition="Parfait &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Radio DJI/20260701_161103.jpg" alt="Radiocommande DJI">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Drone / Accessoire</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Radiocommande DJI RC-N1</h3>
+                <div class="card-price">55 CHF</div>
+                <p class="card-description">Radiocommande DJI, support smartphone.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Parfait &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- VIDEO / PHOTO -->
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_NDI U40/20260701_162509.jpg","x_NDI U40/20260701_162537.jpg","x_NDI U40/20260701_162541.jpg","x_NDI U40/20260701_162551.jpg","x_NDI U40/20260701_162609.jpg"]' data-title="Lot de 5 cameras NDI U40 - Visioconf&eacute;rence / Streaming" data-price="1 200 CHF" data-desc="" data-details="Lot de 5 cam&eacute;ras NDI U40|Connexion r&eacute;seau NDI pour streaming et visioconf&eacute;rence|Format compact type puck|Montage au plafond ou sur pied|Id&eacute;ales pour salles de r&eacute;union, streaming multi-cam&eacute;ra, production live|En &eacute;tat de fonctionnement" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="x_NDI U40/20260701_162509.jpg" alt="Kiloview U40">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Streaming</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Kiloview U40 - Visioconf&eacute;rence / Streaming</h3>
+                <div class="card-price">1 200 CHF</div>
+                <p class="card-description">Cam&eacute;ras NDI pour streaming et visioconf&eacute;rence.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Ricoh Theta Z1/20260701_162118.jpg","x_Ricoh Theta Z1/20260701_162133.jpg","x_Ricoh Theta Z1/20260701_162150.jpg"]' data-title="Ricoh Theta Z1 - Cam&eacute;ra 360&deg;" data-price="700 CHF" data-desc="" data-details="Double capteur 1 pouce|Photos 23MP en 360&deg;|Vid&eacute;o 4K 360|Id&eacute;al visites virtuelles, immobilier, Matterport, Google Street View|Housse de protection Ricoh incluse" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Ricoh Theta Z1/20260701_162118.jpg" alt="Ricoh Theta Z1">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / 360&deg;</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Ricoh Theta Z1 - Cam&eacute;ra 360&deg;</h3>
+                <div class="card-price">700 CHF</div>
+                <p class="card-description">Cam&eacute;ra 360&deg; pro, double capteur 1".</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Canon 100mm/20260709_121601.jpg","x_Canon 100mm/20260709_121633.jpg","x_Canon 100mm/20260709_121736.jpg","x_Canon 100mm/20260709_121907.jpg"]' data-title="Canon EF 100mm f/2.8L Macro IS USM" data-price="600 CHF" data-desc="" data-details="Ouverture f/2.8|Stabilisateur d'image hybride (IS)|Autofocus Ultrasonic (USM)|Macro 1:1 (grandissement nature)|Monture Canon EF (compatible plein format et APS-C)|Id&eacute;al macro, portrait, produit, d&eacute;tails|Inclus : collier de tr&eacute;pied + pare-soleil ET-73 + bague 67-77mm" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Canon 100mm/20260709_121601.jpg" alt="Canon 100mm">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Photo</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Canon EF 100mm f/2.8L Macro IS USM</h3>
+                <div class="card-price">600 CHF</div>
+                <p class="card-description">Objectif macro Canon s&eacute;rie L stabilis&eacute;.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Canon 16-35mm/20260709_121510.jpg","x_Canon 16-35mm/20260709_121520.jpg","x_Canon 16-35mm/20260709_121538.jpg","x_Canon 16-35mm/20260709_121931.jpg"]' data-title="Canon EF 16-35mm f/4L IS USM" data-price="550 CHF" data-desc="" data-details="Ouverture f/4 constante|Stabilisateur d'image (IS)|Autofocus USM rapide et silencieux|Monture Canon EF (compatible plein format et APS-C)|Id&eacute;al paysage, architecture, immobilier, vid&eacute;o|Inclus : pare-soleil Canon EW-82 + bouchon + pochette Canon" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Canon 16-35mm/20260709_121510.jpg" alt="Canon 16-35mm">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Photo</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Canon EF 16-35mm f/4L IS USM</h3>
+                <div class="card-price">550 CHF</div>
+                <p class="card-description">Grand angle Canon s&eacute;rie L stabilis&eacute;.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_VariZoom Solo Jib (grue caméra carbone avec housse)/20260702_143732.jpg","x_VariZoom Solo Jib (grue caméra carbone avec housse)/20260702_143836.jpg","x_VariZoom Solo Jib (grue caméra carbone avec housse)/20260702_143848.jpg"]' data-title="VariZoom Solo Jib - Grue cam&eacute;ra carbone" data-price="350 CHF" data-desc="" data-details="Fibre de carbone, l&eacute;g&egrave;re et portable|Id&eacute;ale pour un op&eacute;rateur seul|Mouvements fluides de type grue cin&eacute;matographique|Housse de transport incluse" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_VariZoom Solo Jib (grue cam%C3%A9ra carbone avec housse)/20260702_143732.jpg" alt="VariZoom Solo Jib">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Mouvement</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">VariZoom Solo Jib - Grue cam&eacute;ra carbone</h3>
+                <div class="card-price">350 CHF</div>
+                <p class="card-description">Grue cam&eacute;ra fibre de carbone, op&eacute;ration solo.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Casques intercom UltraLITE HD/20260701_163657.jpg","x_Casques intercom UltraLITE HD/20260701_163707.jpg","x_Casques intercom UltraLITE HD/20260701_163728.jpg"]' data-title="Syst&egrave;me intercom Eartec UltraLITE HD" data-price="350 CHF" data-desc="" data-details="4 casques avec micro int&eacute;gr&eacute;|Station de charge incluse|Port&eacute;e jusqu'&agrave; 400m en champ libre, full duplex|Id&eacute;al tournages, &eacute;v&eacute;nementiel, th&eacute;&acirc;tre, production live|Sacoche de transport incluse" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Casques intercom UltraLITE HD/20260701_163657.jpg" alt="Eartec UltraLITE HD">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Intercom</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Syst&egrave;me intercom Eartec UltraLITE HD</h3>
+                <div class="card-price">350 CHF</div>
+                <p class="card-description">Kit intercom sans fil. 4 casques + station de charge.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Gimbal DJI Ronin S/20260702_150808.jpg","x_Gimbal DJI Ronin S/20260702_150819.jpg","x_Gimbal DJI Ronin S/20260702_150833.jpg","x_Gimbal DJI Ronin S/20260702_150854.jpg","x_Gimbal DJI Ronin S/20260702_150900.jpg"]' data-title="Gimbal DJI Ronin-S" data-price="200 CHF" data-desc="" data-details="Stabilisateur motoris&eacute; 3 axes|Supporte cam&eacute;ras/reflex jusqu'&agrave; 3.6 kg|Modes SmoothTrack, panorama, timelapse motoris&eacute;|Kit complet bo&icirc;te d'origine : gimbal + poign&eacute;e + accessoires + c&acirc;bles|Usage professionnel" data-condition="Excellent &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Gimbal DJI Ronin S/20260702_150808.jpg" alt="DJI Ronin-S">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Stabilisation</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Gimbal DJI Ronin-S</h3>
+                <div class="card-price">200 CHF</div>
+                <p class="card-description">Stabilisateur 3 axes, jusqu'&agrave; 3.6 kg.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Excellent &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_VariZoom dolly kit complet/20260702_144338.jpg","x_VariZoom dolly kit complet/20260702_144344.jpg","x_VariZoom dolly kit complet/20260702_144432.jpg"]' data-title="VariZoom Dolly Kit complet" data-price="170 CHF" data-desc="" data-details="Kit complet pour travelling cam&eacute;ra|Rails + chariot|Mouvements de cam&eacute;ra fluides et cin&eacute;matographiques|Id&eacute;al tournages, clips, courts-m&eacute;trages" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_VariZoom dolly kit complet/20260702_144338.jpg" alt="VariZoom Dolly">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Mouvement</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">VariZoom Dolly Kit complet</h3>
+                <div class="card-price">170 CHF</div>
+                <p class="card-description">Kit dolly complet. Rails + chariot.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Westcott Green Screen (2.7 x 6m)/20260702_151033.jpg"]' data-title="Westcott Green Screen - Fond vert chroma key" data-price="120 CHF" data-desc="" data-details="Dimensions : 2.7m x 6m (grande surface)|Tissu de qualit&eacute; professionnelle, vert uniforme|Id&eacute;al vid&eacute;o, streaming, YouTube, effets sp&eacute;ciaux" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Westcott Green Screen (2.7 x 6m)/20260702_151033.jpg" alt="Westcott Green Screen">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Studio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Westcott Green Screen (2.7 x 6m)</h3>
+                <div class="card-price">120 CHF</div>
+                <p class="card-description">Fond vert pro 2.7m x 6m.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Desview T3 - téléprompteur/20260701_162854.jpg","x_Desview T3 - téléprompteur/20260701_163005.jpg"]' data-title="Desview T3 - T&eacute;l&eacute;prompteur professionnel" data-price="80 CHF" data-desc="" data-details="Compatible smartphones et tablettes|Compact et l&eacute;ger|Se monte facilement sur un tr&eacute;pied|Id&eacute;al YouTube, interviews, pr&eacute;sentations et tournages|Peu utilis&eacute;" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Desview T3 - t%C3%A9l%C3%A9prompteur/20260701_162854.jpg" alt="Desview T3">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Accessoire</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Desview T3 - T&eacute;l&eacute;prompteur</h3>
+                <div class="card-price">80 CHF</div>
+                <p class="card-description">T&eacute;l&eacute;prompteur portable, montage tr&eacute;pied.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_slider ALX S8/20260702_144208.jpg","x_slider ALX S8/20260702_144217.jpg","x_slider ALX S8/20260702_144222.jpg","x_slider ALX S8/20260702_144228.jpg","x_slider ALX S8/20260702_144234.jpg"]' data-title="Slider vid&eacute;o ALX S8" data-price="80 CHF" data-desc="" data-details="Course environ 80cm|Rail en aluminium, glissement fluide et silencieux|Id&eacute;al mouvements de cam&eacute;ra lin&eacute;aires et cin&eacute;matographiques|Housse de transport rembourr&eacute;e incluse|Rotule/adaptateur inclus" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_slider ALX S8/20260702_144208.jpg" alt="Slider ALX S8">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Mouvement</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Slider vid&eacute;o ALX S8</h3>
+                <div class="card-price">80 CHF</div>
+                <p class="card-description">Slider ~80cm, aluminium, silencieux.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Foldio 360 Smart Turntable/20260702_144550.jpg","x_Foldio 360 Smart Turntable/20260702_144557.jpg","x_Foldio 360 Smart Turntable/20260702_144604.jpg","x_Foldio 360 Smart Turntable/20260702_144635.jpg"]' data-title="Foldio 360 Smart Turntable" data-price="60 CHF" data-desc="" data-details="Plateau tournant motoris&eacute; pour photographie de produits|Rotation contr&ocirc;l&eacute;e par application smartphone (Bluetooth)|Id&eacute;al vues 360&deg; produits (e-commerce, catalogue)|Complet dans sa bo&icirc;te d'origine avec notice" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Foldio 360 Smart Turntable/20260702_144550.jpg" alt="Foldio 360">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Photo produit</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Foldio 360 Smart Turntable</h3>
+                <div class="card-price">60 CHF</div>
+                <p class="card-description">Plateau tournant motoris&eacute; pour photo 360&deg;.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Westcott Gris neutre/20260702_151059.jpg"]' data-title="Westcott - Fond gris neutre" data-price="50 CHF" data-desc="" data-details="Fond photo/vid&eacute;o gris neutre|Couleur neutre et uniforme, qualit&eacute; studio|Id&eacute;al portraits, packshots, interviews" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Westcott Gris neutre/20260702_151059.jpg" alt="Westcott Gris">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Studio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Westcott - Fond gris neutre</h3>
+                <div class="card-price">50 CHF</div>
+                <p class="card-description">Fond gris neutre, qualit&eacute; studio.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Matterport Axis/20260701_162218.jpg","x_Matterport Axis/20260701_162228.jpg"]' data-title="Matterport Axis - Visites virtuelles 3D" data-price="40 CHF" data-desc="" data-details="Support motoris&eacute; pour smartphone|Cr&eacute;e des visites virtuelles 3D avec l'app Matterport|Rotation automatique pour capture &agrave; 360&deg;|Neuf dans sa bo&icirc;te d'origine avec housse de transport|Id&eacute;al immobilier, architecture, &eacute;v&eacute;nementiel" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Matterport Axis/20260701_162218.jpg" alt="Matterport Axis">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / 360&deg;</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Matterport Axis - Visites virtuelles 3D</h3>
+                <div class="card-price">40 CHF</div>
+                <p class="card-description">Support motoris&eacute; pour scan 3D smartphone.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["x_Micros Rode/20260701_162351.jpg"]' data-title="Micros shotgun Rode (lot)" data-price="270 CHF" data-desc="" data-details="2x Rode VideoMic (avec suspension Rycote)|1x Rode VideoMic NTG avec bonnette fourrure|1x bonnette deadcat grand format|Connectique jack 3.5mm, montage griffe flash|Id&eacute;al vid&eacute;o, YouTube, tournage" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Micros Rode/20260701_162351.jpg" alt="Micros Rode">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Audio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Micros shotgun Rode (lot)</h3>
+                <div class="card-price">270 CHF</div>
+                <p class="card-description">Lot micros shotgun : 2x VideoMic + 1x NTG.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- AUDIO -->
+        <div class="card" data-category="audio" onclick="openModal(this)" data-photos='["x_Sennheiser EW 100 G3/20260701_161529.jpg","x_Sennheiser EW 100 G3/20260701_161541.jpg"]' data-title="Sennheiser EW 100 G3 - Micro HF sans fil" data-price="250 CHF" data-desc="" data-details="&Eacute;metteur de poche + r&eacute;cepteur portable|Qualit&eacute; audio professionnelle|Robuste et fiable|Id&eacute;al tournages, &eacute;v&eacute;nementiel, conf&eacute;rences|En bon &eacute;tat de fonctionnement" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Sennheiser EW 100 G3/20260701_161529.jpg" alt="Sennheiser EW 100 G3">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Audio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Sennheiser EW 100 G3 - Micro HF</h3>
+                <div class="card-price">250 CHF</div>
+                <p class="card-description">Micro HF sans fil pro, &eacute;metteur + r&eacute;cepteur.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="audio" onclick="openModal(this)" data-photos='["x_RØDELink Wireless Microphone/20260701_161610.jpg","x_RØDELink Wireless Microphone/20260701_161621.jpg"]' data-title="RODELink Filmmaker Kit" data-price="100 CHF" data-desc="" data-details="S&eacute;rie num&eacute;rique (pas d'interf&eacute;rences)|&Eacute;metteur + r&eacute;cepteur|Micro cravate inclus|Id&eacute;al tournages, interviews, documentaires" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_R%C3%98DELink Wireless Microphone/20260701_161610.jpg" alt="RODELink">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Audio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">RODELink Filmmaker Kit</h3>
+                <div class="card-price">100 CHF</div>
+                <p class="card-description">Micro cravate sans fil num&eacute;rique.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="audio" onclick="openModal(this)" data-photos='["x_Rode Wireless Go/20260701_161810.jpg","x_Rode Wireless Go/20260701_161824.jpg","x_Rode Wireless Go/20260701_161834.jpg"]' data-title="Rode Wireless Go" data-price="55 CHF" data-desc="" data-details="&Eacute;metteur + r&eacute;cepteur ultra-compacts (clip)|Port&eacute;e jusqu'&agrave; 70m|Qualit&eacute; broadcast|Id&eacute;al interviews, vlogs, YouTube, tournage" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Rode Wireless Go/20260701_161810.jpg" alt="Rode Wireless Go">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Audio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Rode Wireless Go</h3>
+                <div class="card-price">55 CHF</div>
+                <p class="card-description">Micro sans fil ultra-compact, port&eacute;e 70m.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- INFORMATIQUE -->
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["x_Portatil/20260702_153139.jpg","x_Portatil/20260702_153140.jpg","x_Portatil/20260702_153150.jpg","x_Portatil/20260702_153331.jpg"]' data-title="PC Portable ASUS ROG Strix G731GW - Gaming 17&quot;" data-price="680 CHF" data-oldprice="" data-desc="" data-details="Intel Core i7-9750H (6 coeurs / 12 threads)|NVIDIA GeForce RTX 2070 (8 GB)|32 Go RAM DDR4|Stockage : 1.38 To (SSD + HDD)|&Eacute;cran 17.3&quot; Full HD 144Hz|Clavier RGB|Windows 11 Famille (licence active)|Parfait pour gaming, montage vid&eacute;o, streaming ou 3D|Chargeur inclus" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Portatil/20260702_153139.jpg" alt="ASUS ROG Strix">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / Portable</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">ASUS ROG Strix G731GW - Gaming 17"</h3>
+                <div class="card-price">680 CHF</div>
+                <p class="card-description">PC portable gaming 17.3", clavier RGB.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["x_Ordi/20260708_114108.jpg","x_Ordi/20260708_114129.jpg","x_Ordi/20260708_114135.jpg","x_Ordi/20260708_114202.jpg"]' data-title="Ordinateur PC complet" data-price="D&egrave;s 450 CHF" data-desc="" data-details="4 machines pr&ecirc;tes &agrave; tourner :|--- Config 1 (480 CHF) ---|Disque M.2 : 500 Go + 2 To|Carte graphique : Radeon RX 580|Processeur : AMD Ryzen 5 5500 (8 coeurs)|RAM : 32 Go|Bo&icirc;tier : Be Quiet!|--- Config 2 (580 CHF) ---|Disque M.2 : 500 Go + 500 Go|Carte graphique : Nvidia GeForce RTX 2070 8 Go|Processeur : AMD Ryzen 5 3600 (6 coeurs)|RAM : 32 Go|Bo&icirc;tier : Be Quiet!|--- Config 3 (450 CHF) ---|Disque M.2 : 500 Go + 1 To|Carte graphique : Nvidia GeForce GTX 1080 8 Go|Processeur : Intel Core i7-7700K|RAM : 32 Go|Bo&icirc;tier : Cooler Master|--- Config 4 (750 CHF) ---|Disque M.2 : 1 To|Carte graphique : Nvidia GeForce GTX 1080 Ti 11 Go|Processeur : AMD Ryzen 9 5900X (12 coeurs)|RAM : 64 Go|Bo&icirc;tier : Be Quiet!" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Ordi/20260708_114108.jpg" alt="Ordinateur PC">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Ordinateur PC complet</h3>
+                <div class="card-price">D&egrave;s 450 CHF</div>
+                <p class="card-description">4 configurations disponibles (450 &agrave; 750 CHF).</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["x_Ordi GMKtec/20260708_131832.jpg"]' data-title="MINI PC K6 - Ryzen 7 7840HS" data-price="400 CHF" data-desc="" data-details="AMD Ryzen 7 7840HS (8 coeurs)|32 Go RAM DDR5|SSD 1 To|Dimensions compactes, design l&eacute;ger|Windows 11 Pro" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Ordi GMKtec/20260708_131832.jpg" alt="GMKtec K6">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / Mini PC</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">MINI PC K6 - Ryzen 7 7840HS</h3>
+                <div class="card-price">400 CHF</div>
+                <p class="card-description">Mini PC AMD Ryzen 7, compact et silencieux.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["x_ecran samsung/20260708_132144.jpg","x_ecran samsung/20260708_132255.jpg"]' data-title="&Eacute;cran Samsung" data-price="60 CHF" data-desc="" data-details="Moniteur Samsung|Fonctionnel|Id&eacute;al bureau ou second &eacute;cran" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="x_ecran samsung/20260708_132144.jpg" alt="Ecran Samsung">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / &Eacute;cran</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">&Eacute;cran Samsung</h3>
+                <div class="card-price">60 CHF</div>
+                <p class="card-description">Moniteur Samsung, id&eacute;al bureau.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["x_ecran LG1/20260708_132311.jpg","x_ecran LG1/20260708_132318.jpg"]' data-title="&Eacute;cran LG" data-price="60 CHF" data-oldprice="" data-desc="" data-details="Moniteur LG|Fonctionnel|Id&eacute;al bureau ou second &eacute;cran" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="x_ecran LG1/20260708_132311.jpg" alt="Ecran LG">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / &Eacute;cran</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">&Eacute;cran LG</h3>
+                <div class="card-price">60 CHF</div>
+                <p class="card-description">Moniteur LG, prix r&eacute;duit !</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- MOBILIER -->
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["x_Chaises Girsberger/20260708_131955.jpg","x_Chaises Girsberger/20260708_132046.jpg","x_Chaises Girsberger/20260708_132109.jpg","x_Chaises Girsberger/20260708_132120.jpg"]' data-title="Chaises de bureau Girsberger (lot de 3)" data-price="550 CHF" data-desc="" data-details="Lot de 3 chaises pivotantes|Marque suisse haut de gamme Girsberger|Pi&egrave;tement aluminium poli|Dossier ergonomique &agrave; lamelles|R&eacute;glage en hauteur|Prix neuf ~CHF 1'000/chaise" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Chaises Girsberger/20260708_131955.jpg" alt="Chaises Girsberger">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Chaises Girsberger (lot de 3)</h3>
+                <div class="card-price">550 CHF</div>
+                <p class="card-description">Lot de 3 chaises pivotantes haut de gamme suisse.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["x_Cama Marmo 3D/20260709_105253.jpg","x_Cama Marmo 3D/20260709_105303.jpg"]' data-title="Commode + buffet - Cama Marmo 3D" data-price="450 CHF" data-desc="" data-details="Commode et buffet assortis|Design moderne|Finition effet marbre 3D|Rangement g&eacute;n&eacute;reux" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Cama Marmo 3D/20260709_105253.jpg" alt="Cama Marmo 3D">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Commode + buffet - Cama Marmo 3D</h3>
+                <div class="card-price">450 CHF</div>
+                <p class="card-description">Commode/buffet design, effet marbre 3D.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["x_Chaises AC Design Brenda/20260709_105444.jpg","x_Chaises AC Design Brenda/20260709_105459.jpg","x_Chaises AC Design Brenda/20260709_105640.jpg","x_Chaises AC Design Brenda/20260709_105644.jpg"]' data-title="Chaises AC Design Brenda" data-price="450 CHF" data-desc="" data-details="Design scandinave AC Design, mod&egrave;le Brenda|Confortables|Finitions soign&eacute;es" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Chaises AC Design Brenda/20260709_105444.jpg" alt="Chaises Brenda">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Chaises AC Design Brenda</h3>
+                <div class="card-price">450 CHF</div>
+                <p class="card-description">Chaises design scandinave, confortables.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["x_canapé/20260701_160913.jpg","x_canapé/20260701_160953.jpg"]' data-title="Canap&eacute;-lit Vees" data-price="280 CHF" data-desc="" data-details="Canap&eacute; 2 places|Couleur rose/terracotta|Design moderne et &eacute;pur&eacute;, pieds m&eacute;tal noirs|Tissu en bon &eacute;tat, assise confortable|Id&eacute;al bureau, salon ou salle d'attente" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_canap%C3%A9/20260701_160913.jpg" alt="Canape-lit">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Canap&eacute;-lit Vees</h3>
+                <div class="card-price">280 CHF</div>
+                <p class="card-description">Canap&eacute;-lit convertible, rose/terracotta.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["x_Table AC Design Amble/20260709_105508.jpg","x_Table AC Design Amble/20260709_105530.jpg","x_Table AC Design Amble/20260709_105623.jpg"]' data-title="Table AC Design Amble" data-price="200 CHF" data-desc="" data-details="Design scandinave AC Design, mod&egrave;le Amble|Finitions soign&eacute;es" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Table AC Design Amble/20260709_105508.jpg" alt="Table Amble">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Table AC Design Amble</h3>
+                <div class="card-price">200 CHF</div>
+                <p class="card-description">Table design scandinave, finitions soign&eacute;es.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["x_Console/20260709_105330.jpg","x_Console/20260709_105339.jpg"]' data-title="Table console" data-price="40 CHF" data-desc="" data-details="Dimensions : 100 x 30 x 80 cm|Format console compact|Pratique et d&eacute;coratif|Id&eacute;al entr&eacute;e ou bureau" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="x_Console/20260709_105330.jpg" alt="Console">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Table console</h3>
+                <div class="card-price">40 CHF</div>
+                <p class="card-description">Console compacte, id&eacute;al entr&eacute;e.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- NOUVEAUX ARTICLES - VIDEO / PHOTO -->
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["Sony FX3/Capture d&#39;écran 2026-07-10 191951.png","Sony FX3/Capture d&#39;écran 2026-07-10 192007.png","Sony FX3/Capture d&#39;écran 2026-07-10 192012.png"]' data-title="Sony FX3 - Cam&eacute;ra Cinema Line" data-price="Prix &agrave; discuter" data-desc="" data-details="Capteur plein format Exmor R CMOS 12.1 MP r&eacute;tro-&eacute;clair&eacute;|Vid&eacute;o 4K 120fps, 10-bit 4:2:2 en interne|S-Log3, S-Cinetone|Sensibilit&eacute; ISO : 80 - 102'400 (extensible 409'600)|Autofocus hybride 627 points (d&eacute;tection yeux/visage)|&Eacute;cran tactile orientable|Stabilisation capteur 5 axes (Active Mode)|Double slot CFexpress Type A / SD UHS-II|Ventilation active int&eacute;gr&eacute;e (enregistrement illimit&eacute;)|Poign&eacute;e XLR amovible avec 2 entr&eacute;es XLR/TRS|Connectique : HDMI full-size, USB-C, multi-shoe, TC in/out|Poids : environ 715g (bo&icirc;tier seul)|Vendu bo&icirc;tier seul (sans objectif)|Usage professionnel soign&eacute;" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Sony FX3/Capture d'%C3%A9cran 2026-07-10 191951.png" alt="Sony FX3">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Cin&eacute;ma</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Sony FX3 - Cam&eacute;ra Cinema Line</h3>
+                <div class="card-price">Prix &agrave; discuter</div>
+                <p class="card-description">Cam&eacute;ra cin&eacute;ma compacte, 4K 120fps.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["Sony A7 SIII/Capture d&#39;écran 2026-07-10 192040.png","Sony A7 SIII/Capture d&#39;écran 2026-07-10 192046.png","Sony A7 SIII/Capture d&#39;écran 2026-07-10 192059.png"]' data-title="Sony Alpha 7S III (A7S3)" data-price="Prix &agrave; discuter" data-desc="" data-details="Sp&eacute;cialis&eacute; vid&eacute;o et basse lumi&egrave;re|Capteur plein format Exmor R CMOS 12.1 MP r&eacute;tro-&eacute;clair&eacute;|Vid&eacute;o 4K 120fps, 10-bit 4:2:2 en interne|Sensibilit&eacute; ISO native : 80 - 102'400 (extensible 409'600)|Autofocus hybride 759 points (d&eacute;tection yeux/visage)|&Eacute;cran tactile orientable, viseur OLED 9.44M points|Stabilisation capteur 5 axes (IBIS)|Double slot CFexpress Type A / SD UHS-II|Connectique : HDMI full-size, USB-C, micro, casque|Poids : environ 700g (bo&icirc;tier seul)|Autonomie am&eacute;lior&eacute;e (batterie NP-FZ100)|Vendu bo&icirc;tier seul (sans objectif)|Usage professionnel soign&eacute;" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Sony A7 SIII/Capture d'%C3%A9cran 2026-07-10 192040.png" alt="Sony A7S III">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Photo</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Sony Alpha 7S III (A7S3)</h3>
+                <div class="card-price">Prix &agrave; discuter</div>
+                <p class="card-description">Hybride plein format, roi de la basse lumi&egrave;re.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["Objectif Tamron f2.8-5.6 28-200mm/715849875_28332577856332370_4503405264319936643_n.jpg","Objectif Tamron f2.8-5.6 28-200mm/716209886_3515435695261951_7304087167027388316_n.jpg","Objectif Tamron f2.8-5.6 28-200mm/716470264_1393168919316888_7176411740694453162_n.jpg"]' data-title="Objectif Tamron 28-200mm f/2.8-5.6" data-price="400 CHF" data-desc="" data-details="Focale : 28-200mm (grand-angle au t&eacute;l&eacute;objectif)|Ouverture : f/2.8-5.6 (excellente luminosit&eacute;)|Autofocus rapide et silencieux|Conception l&eacute;g&egrave;re et compacte|Haute qualit&eacute; optique (nettet&eacute; et couleurs fid&egrave;les)|Id&eacute;al voyages, portraits, paysages|&Eacute;tat impeccable, test&eacute; 100% fonctionnel|Fourni avec bouchons" data-condition="&Eacute;tat impeccable">
+            <div class="card-img-container">
+                <img class="card-img" src="Objectif Tamron f2.8-5.6 28-200mm/715849875_28332577856332370_4503405264319936643_n.jpg" alt="Tamron 28-200mm">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Photo</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Objectif Tamron 28-200mm f/2.8-5.6</h3>
+                <div class="card-price">400 CHF</div>
+                <p class="card-description">Zoom polyvalent 28-200mm, compact.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">&Eacute;tat impeccable</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["FeiyuTech/20231113_164354.jpg","FeiyuTech/20231113_164428.jpg","FeiyuTech/20231113_164503.jpg","FeiyuTech/20231113_164555.jpg","FeiyuTech/20231113_164605.jpg"]' data-title="FeiyuTech AK4000 - Gimbal 3 axes" data-price="140 CHF" data-desc="" data-details="Stabilisateur gimbal 3 axes pour cam&eacute;ras/DSLR|Supporte jusqu'&agrave; 4 kg de charge utile|&Eacute;cran tactile int&eacute;gr&eacute;|Modes multiples (follow, lock, selfie, etc.)|Livr&eacute; dans sa bo&icirc;te d'origine|Sacoche de transport incluse|Id&eacute;al tournages vid&eacute;o professionnels" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="FeiyuTech/20231113_164354.jpg" alt="FeiyuTech AK4000">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / Stabilisation</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">FeiyuTech AK4000 - Gimbal 3 axes</h3>
+                <div class="card-price">140 CHF</div>
+                <p class="card-description">Gimbal 3 axes, jusqu'&agrave; 4 kg de charge.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="video" onclick="openModal(this)" data-photos='["Enrouleur cable video/20260710_162045.jpg","Enrouleur cable video/20260710_162058.jpg","Enrouleur cable video/20260710_162104.jpg"]' data-title="Enrouleurs c&acirc;bles vid&eacute;o Schill (lot de 3)" data-price="150 CHF" data-desc="" data-details="Lot de 3 enrouleurs professionnels (marque Schill)|Bobines orange/noires robustes avec poign&eacute;es|C&acirc;bles vid&eacute;o type BNC/SDI|Id&eacute;al production vid&eacute;o, &eacute;v&eacute;nementiel, broadcast|En &eacute;tat de fonctionnement|Vendus en lot de 3" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Enrouleur cable video/20260710_162045.jpg" alt="Enrouleurs Schill">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Vid&eacute;o / C&acirc;blage</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Enrouleurs c&acirc;bles vid&eacute;o Schill (lot de 3)</h3>
+                <div class="card-price">150 CHF</div>
+                <p class="card-description">Lot de 3 enrouleurs pro, c&acirc;bles BNC/SDI.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- NOUVEAUX ARTICLES - AUDIO -->
+        <div class="card" data-category="audio" onclick="openModal(this)" data-photos='["Enrouleur XLR 50m/20260710_162123.jpg","Enrouleur XLR 50m/20260710_162129.jpg"]' data-title="Enrouleur c&acirc;ble XLR 50m" data-price="120 CHF" data-desc="" data-details="C&acirc;ble audio XLR de 50 m&egrave;tres|Bobine orange robuste avec poign&eacute;e et manivelle|Connecteurs XLR m&acirc;le/femelle|Id&eacute;al sonorisation, &eacute;v&eacute;nementiel, tournage, studio|En bon &eacute;tat de fonctionnement" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Enrouleur XLR 50m/20260710_162123.jpg" alt="Enrouleur XLR">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Audio</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Enrouleur c&acirc;ble XLR 50m</h3>
+                <div class="card-price">120 CHF</div>
+                <p class="card-description">C&acirc;ble XLR 50m sur enrouleur pro.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- NOUVEAUX ARTICLES - INFORMATIQUE -->
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Serveur Synology/20260710_160934.jpg"]' data-title="Serveur NAS Synology - Baie rack compl&egrave;te" data-price="Prix &agrave; discuter" data-desc="" data-details="2x NAS Synology (baies multiples)|Switch r&eacute;seau inclus|C&acirc;blage structur&eacute; (Ethernet + fibre/cuivre)|Baie rack noire ouverte 19&quot;|Id&eacute;al stockage r&eacute;seau, sauvegarde, serveur multim&eacute;dia|En &eacute;tat de fonctionnement (LEDs actives)|Remise en main propre uniquement (mat&eacute;riel lourd)" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Serveur Synology/20260710_160934.jpg" alt="Serveur Synology">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / Serveur</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Serveur NAS Synology - Baie rack</h3>
+                <div class="card-price">Prix &agrave; discuter</div>
+                <p class="card-description">Baie rack compl&egrave;te avec 2x NAS Synology.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Brother MFC-L3740CDW Imprimante multifonction laser couleur LED/20260710_161820.jpg","Brother MFC-L3740CDW Imprimante multifonction laser couleur LED/20260710_161831.jpg"]' data-title="Brother MFC-L3740CDW - Imprimante laser couleur" data-price="300 CHF" data-desc="" data-details="4 en 1 : impression, copie, scan, fax|Impression laser couleur LED|Recto-verso automatique|Connexion WiFi, Ethernet et USB|&Eacute;cran tactile couleur|Id&eacute;ale pour usage professionnel ou t&eacute;l&eacute;travail intensif|En bon &eacute;tat de fonctionnement" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Brother MFC-L3740CDW Imprimante multifonction laser couleur LED/20260710_161820.jpg" alt="Brother MFC-L3740CDW">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Brother MFC-L3740CDW - Laser couleur</h3>
+                <div class="card-price">300 CHF</div>
+                <p class="card-description">Imprimante multifonction laser couleur 4 en 1.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Switch reseau HP V1910-24G PoE/20240320_163948.jpg","Switch reseau HP V1910-24G PoE/20240320_163958.jpg","Switch reseau HP V1910-24G PoE/20240320_164010.jpg","Switch reseau HP V1910-24G PoE/20240320_164034.jpg","Switch reseau HP V1910-24G PoE/20240320_164043.jpg"]' data-title="Switch HP V1910-24G PoE" data-price="80 CHF" data-desc="" data-details="24 ports Gigabit + ports SFP|Power over Ethernet (PoE)|Format rackable 19 pouces (1U)|PoE pour cam&eacute;ras IP, points d'acc&egrave;s WiFi, t&eacute;l&eacute;phones IP|En &eacute;tat de fonctionnement" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Switch reseau HP V1910-24G PoE/20240320_163948.jpg" alt="Switch HP PoE">
+                <span class="card-img-badge">5 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / R&eacute;seau</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Switch HP V1910-24G PoE</h3>
+                <div class="card-price">80 CHF</div>
+                <p class="card-description">Switch 24 ports Gigabit PoE, rackable.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Moniteur_ HP/20231113_161624.jpg","Moniteur_ HP/20231113_161649.jpg","Moniteur_ HP/20231113_161712.jpg","Moniteur_ HP/20231113_161749.jpg"]' data-title="Moniteurs HP ZR2330w (lot de 5)" data-price="40 CHF/pi&egrave;ce" data-desc="" data-details="R&eacute;solution 1920x1080 pixels, 23 pouces|Dalle IPS antireflet|Luminosit&eacute; 250 cd/m&sup2;|Connexions : DisplayPort + DVI-D + VGA|5 pi&egrave;ces disponibles" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Moniteur_ HP/20231113_161624.jpg" alt="Moniteur HP">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / &Eacute;cran</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Moniteurs HP ZR2330w (x5 dispo)</h3>
+                <div class="card-price">40 CHF/pi&egrave;ce</div>
+                <p class="card-description">Moniteur pro 23" IPS Full HD.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Moniteur_ - AOC/20231113_162422.jpg","Moniteur_ - AOC/20231113_162528.jpg","Moniteur_ - AOC/20231113_162537.jpg","Moniteur_ - AOC/20231113_165329.jpg"]' data-title="Moniteurs AOC Borderless (x4)" data-price="45 CHF/pi&egrave;ce" data-desc="" data-details="Full HD 1080p|Design borderless (bords fins)|Dalle mate|Pied avec base ronde|Connexions : HDMI + VGA|Id&eacute;al bureau, second &eacute;cran ou poste de travail|En &eacute;tat de fonctionnement|4 exemplaires disponibles" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Moniteur_ - AOC/20231113_162422.jpg" alt="Moniteur AOC">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / &Eacute;cran</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Moniteurs AOC Borderless (x4)</h3>
+                <div class="card-price">45 CHF/pi&egrave;ce</div>
+                <p class="card-description">Moniteur AOC 1080p borderless. 4 dispo.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Moniteur_ Samsung SyncMaster SA450/20231113_163023.jpg","Moniteur_ Samsung SyncMaster SA450/20231113_163115.jpg","Moniteur_ Samsung SyncMaster SA450/20231113_163139.jpg"]' data-title="Moniteurs Samsung SyncMaster SA450 (x2)" data-price="40 CHF/pi&egrave;ce" data-desc="" data-details="R&eacute;solution 1920x1080 pixels, 24 pouces|Connexions vid&eacute;o : DVI-D + VGA|2 pi&egrave;ces disponibles" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Moniteur_ Samsung SyncMaster SA450/20231113_163023.jpg" alt="Samsung SA450">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / &Eacute;cran</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Moniteurs Samsung SA450 24" (x2)</h3>
+                <div class="card-price">40 CHF/pi&egrave;ce</div>
+                <p class="card-description">Moniteur Samsung 24" Full HD.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="informatique" onclick="openModal(this)" data-photos='["Moniteur_Acer/20231113_163457.jpg","Moniteur_Acer/20231113_163612.jpg","Moniteur_Acer/20231113_163621.jpg"]' data-title="Moniteurs Acer 21.5&quot; (x2)" data-price="40 CHF/pi&egrave;ce" data-desc="" data-details="R&eacute;solution 1920x1080, 21.5 pouces|Technologie LCD LED, 60 Hz|Luminosit&eacute; 200 cd/m&sup2;|Connexions : DVI + VGA + HDMI|2 pi&egrave;ces disponibles" data-condition="Fonctionnel">
+            <div class="card-img-container">
+                <img class="card-img" src="Moniteur_Acer/20231113_163457.jpg" alt="Moniteur Acer">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Informatique / &Eacute;cran</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Moniteurs Acer 21.5" (x2)</h3>
+                <div class="card-price">40 CHF/pi&egrave;ce</div>
+                <p class="card-description">Moniteur Acer 21.5" Full HD LED.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Fonctionnel</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <!-- NOUVEAUX ARTICLES - MOBILIER -->
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Chaises/20260710_161632.jpg"]' data-title="Chaises design grillage (lot de 6)" data-price="360 CHF" data-desc="" data-details="Lot de 6 chaises design contemporain|Structure polypropyl&egrave;ne ajour&eacute; (motif grillage)|Couleur rouge/terracotta, pieds m&eacute;tal noir|L&eacute;g&egrave;res, empilables, r&eacute;sistantes|Id&eacute;ales pour salle &agrave; manger, bureau, r&eacute;union ou terrasse couverte|Vendues en lot de 6" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Chaises/20260710_161632.jpg" alt="Chaises grillage">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Chaises design grillage (lot de 6)</h3>
+                <div class="card-price">360 CHF</div>
+                <p class="card-description">Lot de 6 chaises design, empilables.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Table/20260710_161653.jpg","Table/20260710_162644.jpg","Table/20260710_162654.jpg"]' data-title="Table de r&eacute;union - Plateau bois clair" data-price="210 CHF" data-desc="" data-details="Plateau en bois clair (finition ch&ecirc;ne naturel)|Pieds en m&eacute;tal noir, design moderne et &eacute;pur&eacute;|Dimensions g&eacute;n&eacute;reuses, accueille 6 &agrave; 8 personnes|Id&eacute;ale pour salle de r&eacute;union, salle &agrave; manger ou coworking" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Table/20260710_161653.jpg" alt="Table reunion">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Table de r&eacute;union - Bois clair</h3>
+                <div class="card-price">210 CHF</div>
+                <p class="card-description">Grande table bois clair, 6-8 personnes.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Etageres stockage -Toolcraft/Capture d&#39;écran 2026-07-10 185713.png"]' data-title="&Eacute;tag&egrave;re stockage Toolcraft - Charge lourde" data-price="160 CHF" data-desc="" data-details="4 niveaux, structure m&eacute;tal noire + tablettes MDF|Capacit&eacute; de charge : 350 kg par &eacute;tag&egrave;re|Montage sans vis (syst&egrave;me clips/embo&icirc;tement)|Dimensions : 160 x 60 x 180 cm|Id&eacute;ale pour stockage lourd : garage, atelier, r&eacute;serve, entrep&ocirc;t" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Etageres stockage -Toolcraft/Capture d'%C3%A9cran 2026-07-10 185713.png" alt="Etagere Toolcraft">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier / Stockage</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">&Eacute;tag&egrave;re Toolcraft - Charge lourde</h3>
+                <div class="card-price">160 CHF</div>
+                <p class="card-description">&Eacute;tag&egrave;re 4 niveaux, 350 kg/niveau.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Chariot Tectake/Capture d&#39;écran 2026-07-10 190607.png","Chariot Tectake/Capture d&#39;écran 2026-07-10 190622.png","Chariot Tectake/Capture d&#39;écran 2026-07-10 190630.png","Chariot Tectake/Capture d&#39;écran 2026-07-10 190639.png"]' data-title="Chariot &agrave; outils TecTake - 5 tiroirs" data-price="160 CHF" data-desc="" data-details="5 tiroirs avec glissi&egrave;res &agrave; billes|Structure m&eacute;tal noire robuste|Fermeture &agrave; cl&eacute; (s&eacute;curis&eacute;)|4 roulettes pivotantes 360&deg; (dont 2 avec frein)|6 tapis antid&eacute;rapants inclus|Plan de travail sur le dessus|Dimensions : 69 x 33 x 79 cm|Capacit&eacute; de charge : 150 kg|Id&eacute;al garage, atelier, m&eacute;canique ou bricolage" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Chariot Tectake/Capture d'%C3%A9cran 2026-07-10 190607.png" alt="Chariot TecTake">
+                <span class="card-img-badge">4 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier / Atelier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Chariot &agrave; outils TecTake - 5 tiroirs</h3>
+                <div class="card-price">160 CHF</div>
+                <p class="card-description">Servante d'atelier 5 tiroirs, m&eacute;tal noir.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Chaise de Bar/20260710_162425.jpg","Chaise de Bar/20260710_162434.jpg"]' data-title="Chaises de bar (lot de 2)" data-price="150 CHF" data-desc="" data-details="Lot de 2 tabourets hauts|Design r&eacute;tro-moderne : coque bois courb&eacute; (finition noyer)|Assise et dossier en simili cuir noir|Pied chrom&eacute; avec base ronde, repose-pieds int&eacute;gr&eacute;|R&eacute;glables en hauteur (v&eacute;rin &agrave; gaz)|Id&eacute;ales pour &icirc;lot de cuisine, bar ou comptoir" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Chaise de Bar/20260710_162425.jpg" alt="Chaises de bar">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Chaises de bar (lot de 2)</h3>
+                <div class="card-price">150 CHF</div>
+                <p class="card-description">Lot de 2 tabourets bois/cuir noir.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Table bureau CEHA PM/717038102_934730599585205_7178801556563712788_n.jpg","Table bureau CEHA PM/718043065_1488197523083004_6693532635400458366_n.jpg"]' data-title="Bureaux CEHA PM (lot de 2)" data-price="150 CHF" data-desc="" data-details="Lot de 2 bureaux CEHA PM-200-100|Dimensions : 200 x 100 x 72/75 cm|Structure m&eacute;tal solide, plateau blanc mat|Charge max : 100 kg|Tr&egrave;s bon &eacute;tat g&eacute;n&eacute;ral" data-condition="Tr&egrave;s bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Table bureau CEHA PM/717038102_934730599585205_7178801556563712788_n.jpg" alt="Bureau CEHA">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier / Bureau</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Bureaux CEHA PM (lot de 2)</h3>
+                <div class="card-price">150 CHF</div>
+                <p class="card-description">Lot de 2 bureaux 200x100cm, plateau blanc.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Tr&egrave;s bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Chaises Bleu/712005103_2428545814308100_484400811873615531_n.jpg","Chaises Bleu/717496024_1740921677339654_7853440969588114775_n.jpg"]' data-title="Chaises empilables bleu marine (lot de 6)" data-price="140 CHF" data-desc="" data-details="Lot de 6 chaises polyvalentes|Assise bleu marine, structure gris clair|Accoudoirs int&eacute;gr&eacute;s|Empilables : gain de place|Assise en tissu l&eacute;g&egrave;rement rembourr&eacute;|Dossier large en plastique r&eacute;sistant|Id&eacute;al bureau, salle de r&eacute;union ou espace d'attente|Vendues uniquement en lot" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Chaises Bleu/712005103_2428545814308100_484400811873615531_n.jpg" alt="Chaises bleues">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Chaises empilables bleu marine (x6)</h3>
+                <div class="card-price">140 CHF</div>
+                <p class="card-description">Lot de 6 chaises empilables avec accoudoirs.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Etabli - Benson/Capture d&#39;écran 2026-07-10 185422.png"]' data-title="&Eacute;tabli atelier Benson" data-price="110 CHF" data-desc="" data-details="Structure m&eacute;tal noire robuste + plan de travail en bois (MDF)|Panneau perfor&eacute; (pegboard) pour accrocher les outils|2 &eacute;tag&egrave;res de rangement en dessous|Montage simple, sans vis (syst&egrave;me clips/embo&icirc;tement)|Dimensions : 90 x 60 x 180 cm|Id&eacute;al garage, atelier, bricolage ou cave" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Etabli - Benson/Capture d'%C3%A9cran 2026-07-10 185422.png" alt="Etabli Benson">
+                <span class="card-img-badge">1 photo</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier / Atelier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">&Eacute;tabli atelier Benson</h3>
+                <div class="card-price">110 CHF</div>
+                <p class="card-description">&Eacute;tabli + panneau perfor&eacute; + &eacute;tag&egrave;res.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Chaise haute/20260710_162451.jpg","Chaise haute/20260710_162457.jpg","Chaise haute/20260710_162501.jpg"]' data-title="Tabourets hauts velours gris (lot de 2)" data-price="90 CHF" data-desc="" data-details="Lot de 2 tabourets hauts de bar|Assise ronde en velours gris|Pied colonne en m&eacute;tal noir mat|Base ronde stable avec repose-pieds|R&eacute;glables en hauteur (v&eacute;rin &agrave; gaz)|Design sobre et moderne|Vendus en lot de 2" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Chaise haute/20260710_162451.jpg" alt="Tabourets hauts">
+                <span class="card-img-badge">3 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Tabourets hauts velours gris (x2)</h3>
+                <div class="card-price">90 CHF</div>
+                <p class="card-description">Lot de 2 tabourets velours gris.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Table bureau/715649967_2278115562932189_4263651510658065155_n.jpg","Table bureau/717006061_1696890824644335_7001576293931192897_n.jpg"]' data-title="Tables de bureau modulables (lot de 2)" data-price="90 CHF" data-desc="" data-details="Lot de 2 tables de bureau|Dimensions par table : environ 120 x 80 cm|Structure m&eacute;tallique noire, plateau gris mat|Modulables : utilisables seules ou assembl&eacute;es|Stables, robustes, id&eacute;ales pour usage pro intensif" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Table bureau/715649967_2278115562932189_4263651510658065155_n.jpg" alt="Tables bureau">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier / Bureau</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Tables bureau modulables (lot de 2)</h3>
+                <div class="card-price">90 CHF</div>
+                <p class="card-description">Lot de 2 tables 120x80cm, modulables.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+        <div class="card" data-category="mobilier" onclick="openModal(this)" data-photos='["Etageres stockage - Relaxdays/Capture d&#39;écran 2026-07-10 185558.png","Etageres stockage - Relaxdays/Capture d&#39;écran 2026-07-10 185643.png"]' data-title="&Eacute;tag&egrave;re Relaxdays - 5 niveaux" data-price="50 CHF" data-desc="" data-details="5 niveaux de stockage, &eacute;tag&egrave;res en MDF|Structure m&eacute;tal noire|Montage sans vis (syst&egrave;me clips)|Dimensions : 180 x 100 x 60 cm (H x L x P)|Id&eacute;ale pour garage, cave, r&eacute;serve, atelier ou bureau" data-condition="Bon &eacute;tat">
+            <div class="card-img-container">
+                <img class="card-img" src="Etageres stockage - Relaxdays/Capture d'%C3%A9cran 2026-07-10 185558.png" alt="Etagere Relaxdays">
+                <span class="card-img-badge">2 photos</span>
+            </div>
+            <div class="card-header">
+                <span class="card-category">Mobilier / Stockage</span>
+                <span class="card-status">Disponible</span>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">&Eacute;tag&egrave;re Relaxdays - 5 niveaux</h3>
+                <div class="card-price">50 CHF</div>
+                <p class="card-description">&Eacute;tag&egrave;re 5 niveaux, 180x100x60cm.</p>
+            </div>
+            <div class="card-footer">
+                <span class="card-condition">Bon &eacute;tat</span>
+                <span class="card-cta">Voir les photos &rarr;</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<section class="contact-section">
+    <h2>Int&eacute;ress&eacute; par un ou plusieurs articles ?</h2>
+    <p>Remise en main propre. Prix n&eacute;gociables, surtout pour les lots !</p>
+    <a href="https://wa.me/41787138100" target="_blank" class="contact-btn">Micha&euml;l Pedrosa - WhatsApp</a>
+    <p style="margin-top:15px; color:#6e6e73; font-size:0.95rem;">Chemin du Bocquet 38, 1030 Bussigny</p>
+    <div class="info-bar">
+        <div class="info-item">
+            <strong>55+</strong>
+            <span>Articles disponibles</span>
+        </div>
+        <div class="info-item">
+            <strong>Pro</strong>
+            <span>Mat&eacute;riel professionnel</span>
+        </div>
+        <div class="info-item">
+            <strong>Lots</strong>
+            <span>R&eacute;ductions sur lots</span>
+        </div>
+        <div class="info-item">
+            <strong>N&eacute;gociable</strong>
+            <span>Prix &agrave; discuter</span>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Derni&egrave;re mise &agrave; jour : Juillet 2026 | Tous les articles sont vendus en l'&eacute;tat</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-gallery">
+            <img class="modal-main-img" id="modalMainImg" src="" alt="">
+            <button class="modal-nav prev" onclick="prevPhoto()">&#10094;</button>
+            <button class="modal-nav next" onclick="nextPhoto()">&#10095;</button>
+        </div>
+        <div class="modal-counter" id="modalCounter"></div>
+        <div class="modal-thumbs" id="modalThumbs"></div>
+        <div class="modal-info" id="modalInfo"></div>
+    </div>
+</div>
+
+<script>
+    let currentPhotos = [];
+    let currentIndex = 0;
+
+    function openModal(card) {
+        const photos = JSON.parse(card.dataset.photos);
+        const title = card.dataset.title;
+        const price = card.dataset.price;
+        const oldprice = card.dataset.oldprice || '';
+        const details = card.dataset.details.split('|');
+        const condition = card.dataset.condition;
+
+        currentPhotos = photos;
+        currentIndex = 0;
+
+        updateMainImage();
+        renderThumbs();
+
+        let priceHtml = price === 'GRATUIT'
+            ? '<div class="modal-price" style="color:#2e7d32">GRATUIT</div>'
+            : '<div class="modal-price">' + price + (oldprice ? ' <span class="old-price">' + oldprice + '</span>' : '') + '</div>';
+
+        let detailsHtml = '<ul class="modal-details">' + details.map(d => '<li>' + d + '</li>').join('') + '</ul>';
+
+        document.getElementById('modalInfo').innerHTML =
+            '<h2>' + title + '</h2>' +
+            priceHtml +
+            detailsHtml +
+            '<span class="modal-condition">' + condition + '</span>';
+
+        document.getElementById('modalOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+        if (e && e.target !== document.getElementById('modalOverlay')) return;
+        document.getElementById('modalOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function updateMainImage() {
+        document.getElementById('modalMainImg').src = currentPhotos[currentIndex];
+        document.getElementById('modalCounter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
+        document.querySelectorAll('.modal-thumb').forEach((thumb, i) => {
+            thumb.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function renderThumbs() {
+        const container = document.getElementById('modalThumbs');
+        container.innerHTML = currentPhotos.map((photo, i) =>
+            '<img class="modal-thumb' + (i === 0 ? ' active' : '') + '" src="' + photo + '" onclick="goToPhoto(' + i + ')" alt="Photo ' + (i+1) + '">'
+        ).join('');
+    }
+
+    function nextPhoto() {
+        currentIndex = (currentIndex + 1) % currentPhotos.length;
+        updateMainImage();
+    }
+
+    function prevPhoto() {
+        currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+        updateMainImage();
+    }
+
+    function goToPhoto(index) {
+        currentIndex = index;
+        updateMainImage();
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (!document.getElementById('modalOverlay').classList.contains('active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowRight') nextPhoto();
+        if (e.key === 'ArrowLeft') prevPhoto();
+    });
+
+    function filterCards(category) {
+        const cards = document.querySelectorAll('.card');
+        const buttons = document.querySelectorAll('.filter-btn');
+
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

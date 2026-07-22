@@ -1,0 +1,23 @@
+Regie mobile - Rack complet de production video
+
+Station de regie mobile complete en flight case rack.
+Composants principaux :
+- Blackmagic ATEM Mini Extreme (melangeur video 8 entrees HDMI)
+- MT-VIKI 4K HDMI 8X8 Matrix Switch
+- Blackmagic PCIe Cable Kit
+- Blackmagic design ultrastudio 4k extreme
+- Matrice/switcher professionnel avec ecran LCD
+- Multiprise Steffen (alimentation rack)
+- UPC APC (pas inclus)
+- 2 ecrans moniteur de controle
+- Clavier et trackball integres
+- Cablage complet
+
+Ensemble prêt a l'emploi pour production multicam, streaming ou évènementiel.
+Flight case robuste avec roulettes et poignées.
+
+En état de fonctionnement.
+Vendu en lot complet.
+
+
+Prix : 1800.-
